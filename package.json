@@ -1,0 +1,30 @@
+{
+    "name": "reactjs-dialog",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/kinvirgo/reactjs-dialog.git",
+    "author": "kinvirgo <1641652086@qq.com>",
+    "license": "MIT",
+    "scripts": {
+        "test": "parcel example/index.html",
+        "dev": "parcel -p 8900 example/index.html -d build/",
+        "prepublish": "rmdir /s/q dist"
+    },
+    "babel": {
+        "presets": [
+            "env",
+            "react"
+        ]
+    },
+    "dependencies": {
+        "react": "^16.6.3",
+        "react-dom": "^16.6.3",
+        "sass": "^1.15.1"
+    },
+    "devDependencies": {
+        "babel-core": "^6.26.3",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-react": "^6.24.1",
+        "parcel-bundler": "^1.10.3"
+    }
+}

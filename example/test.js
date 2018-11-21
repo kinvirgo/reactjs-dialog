@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import Dialog, {Message,Alert,Confirm,Prompt} from "../src/components/reactjs-dialog"
+import Dialog, {Message,Alert,Confirm,Prompt} from "../dist/reactjs-dialog"
 
 class App extends Component{
     constructor(){

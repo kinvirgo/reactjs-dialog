@@ -1,22 +1,39 @@
 {
     "name": "reactjs-dialog",
-    "version": "1.0.0",
-    "main": "index.js",
-    "repository": "https://github.com/kinvirgo/reactjs-dialog.git",
+    "version": "v1.0.0-alpha.0",
+    "main": "dist/reactjs-dialog.js",
+    "description": "reactjs-dialog for react",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kinvirgo/reactjs-dialog.git"
+    },
+    "homepage": "https://github.com/kinvirgo/reactjs-dialog",
+    "bugs": {
+        "url": "https://github.com/kinvirgo/reactjs-dialog/issues"
+    },
     "author": "kinvirgo <1641652086@qq.com>",
     "license": "MIT",
     "scripts": {
-        "test": "parcel example/index.html",
+        "test": "parcel -p 8900 example/test.html -d build/",
         "dev": "parcel -p 8900 example/index.html -d build/",
-        "prepublish": "rmdir /s/q dist"
+        "prepublish": "rmdir /s/q dist",
+        "prebabel": "babel src/components/ --out-dir dist/"
     },
+    "keywords": [
+        "react",
+        "reactjs",
+        "dialog",
+        "react-dialog"
+    ],
     "babel": {
         "presets": [
             "env",
             "react"
-        ]
+        ],
+        "plugins": ["transform-object-rest-spread"]
     },
     "dependencies": {
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "react": "^16.6.3",
         "react-dom": "^16.6.3",
         "sass": "^1.15.1"

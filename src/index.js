@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import Dialog, {Message,Alert,Confirm,Prompt} from "../src/components/reactjs-dialog"
-require('../src/components/reactjs-dialog.scss')
+import Dialog, {Message,Alert,Confirm,Prompt} from "./components/reactjs-dialog"
+require('./components/reactjs-dialog.scss')
 
 class App extends Component{
     constructor(){

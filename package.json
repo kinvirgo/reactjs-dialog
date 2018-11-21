@@ -14,8 +14,7 @@
     "author": "kinvirgo <1641652086@qq.com>",
     "license": "MIT",
     "scripts": {
-        "test": "parcel -p 8900 example/test.html -d build/",
-        "dev": "parcel -p 8900 example/index.html -d build/",
+        "dev": "parcel -p 8900 src/index.html -d build/",
         "remove:dist": "rmdir /s/q dist",
         "prebabel": "babel src/components/ --out-dir dist/",
         "presass": "sass src/components/reactjs-dialog.scss:dist/reactjs-dialog.css --style compressed --no-source-map",

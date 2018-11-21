@@ -18,9 +18,9 @@
         "test": "parcel example/index.html -d build/",
         "remove:dist": "rmdir /s/q dist",
         "remove:build": "rmdir /s/q build",
-        "prebabel": "babel src/components/ --out-dir dist/",
-        "presass": "sass src/components/reactjs-dialog.scss:dist/reactjs-dialog.css --style compressed --no-source-map",
-        "prepublish": "yarn prebabel && yarn presass"
+        "pre:babel": "babel src/components/ --out-dir dist/",
+        "pre:sass": "sass src/components/reactjs-dialog.scss:dist/reactjs-dialog.css --style compressed --no-source-map",
+        "pre:publish": "yarn pre:babel && yarn pre:sass"
     },
     "keywords": [
         "react",

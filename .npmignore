@@ -1,3 +1,7 @@
 #npm publish
 example/
 build/
+src/
+node_modules/
+.cache/
+*.log

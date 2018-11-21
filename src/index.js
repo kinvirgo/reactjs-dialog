@@ -14,16 +14,16 @@ class App extends Component{
         super();
     }
     render(){
-        var title = "简介:百度";
-        var msg = "百度（<b>纳斯达克：BIDU</b>），全球最大的中文搜索引擎、最大的中文网站。1999年底,身在美国硅谷的李彦宏看到了中国互联网及中文搜索引擎服务的巨大发展潜力，抱着技术改变世界的梦想，他毅然辞掉硅谷的高薪工作，携搜索引擎专利技术，于 2000年1月1日在中关村创建了百度公司。";
+        var title = "简介:React";
+        var msg = "React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。";
         return(
             <div>
                 <h1>reactjs-Dialog v1.0.0</h1>
-                <button onClick={ ()=>{ Dialog.Message("百度（纳斯达克：BIDU）","百度",{
+                <button onClick={ ()=>{ Dialog.Message(msg,title,{
                     mask : true
                 }) } }>Message1</button>
             <button onClick={ ()=>{ _Dialog.Message(msg,title,{
-                        vHtml : true,
+                    vHtml : true,
                     mask : true,
                     button : ['确认','退出'],
                     btnEffect: "center",
@@ -39,7 +39,7 @@ class App extends Component{
                         backgroundSize: 'cover'
                     },
                     titleStyle : {
-                        'color' : "#2985EA"
+                        'color' : "#D91C52"
                     },
                     messageStyle : {
                         fontSize : "14px",

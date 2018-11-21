@@ -252,13 +252,13 @@ var Dialog = function () {
                 var dialogInstall = _this4.state.dialogInstall;
 
                 dialogInstall.Message(msg, title, option);
-                dialogInstall.resolve = function (id) {
+                dialogInstall.resolve = function (_id) {
                     var state = dialogInstall.state;
 
                     dialogInstall.setState(_extends({}, state, {
                         display: false
                     }), function () {
-                        resolve({ id: id });
+                        resolve({ _id: _id });
                     });
                 };
             });
@@ -282,13 +282,13 @@ var Dialog = function () {
                         color: '#d0a41e'
                     }
                 });
-                dialogInstall.resolve = function (id) {
+                dialogInstall.resolve = function (_id) {
                     var state = dialogInstall.state;
 
                     dialogInstall.setState(_extends({}, state, {
                         display: false
                     }), function () {
-                        resolve({ id: id });
+                        resolve({ _id: _id });
                     });
                 };
             });
@@ -311,13 +311,13 @@ var Dialog = function () {
                         color: '#0067ED'
                     }
                 });
-                dialogInstall.resolve = function (id) {
+                dialogInstall.resolve = function (_id) {
                     var state = dialogInstall.state;
 
                     dialogInstall.setState(_extends({}, state, {
                         display: false
                     }), function () {
-                        resolve({ id: id });
+                        resolve({ _id: _id });
                     });
                 };
             });

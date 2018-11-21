@@ -166,13 +166,13 @@ class Dialog {
         return new Promise((resolve, reject) => {
             const {dialogInstall} = this.state;
             dialogInstall.Message(msg, title, option);
-            dialogInstall.resolve = (id) => {
+            dialogInstall.resolve = (_id) => {
                 const {state} = dialogInstall;
                 dialogInstall.setState({
                     ...state,
                     display: false
                 }, () => {
-                    resolve({id});
+                    resolve({_id});
                 })
             }
         })
@@ -190,13 +190,13 @@ class Dialog {
                     color: '#d0a41e'
                 }
             });
-            dialogInstall.resolve = (id) => {
+            dialogInstall.resolve = (_id) => {
                 const {state} = dialogInstall;
                 dialogInstall.setState({
                     ...state,
                     display: false
                 }, () => {
-                    resolve({id});
+                    resolve({_id});
                 })
             }
         })
@@ -213,13 +213,13 @@ class Dialog {
                     color: '#0067ED'
                 }
             });
-            dialogInstall.resolve = (id) => {
+            dialogInstall.resolve = (_id) => {
                 const {state} = dialogInstall;
                 dialogInstall.setState({
                     ...state,
                     display: false
                 }, () => {
-                    resolve({id});
+                    resolve({_id});
                 })
             }
         })

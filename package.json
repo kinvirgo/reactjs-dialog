@@ -1,6 +1,6 @@
 {
     "name": "reactjs-dialog",
-    "version": "v1.0.0-alpha.1",
+    "version": "v1.0.0-alpha.2",
     "main": "dist/reactjs-dialog.js",
     "description": "reactjs-dialog for react",
     "repository": {
@@ -40,10 +40,10 @@
     "dependencies": {
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "react": "^16.6.3",
-        "react-dom": "^16.6.3",
-        "sass": "^1.15.1"
+        "react-dom": "^16.6.3"
     },
     "devDependencies": {
+        "sass": "^1.15.1",
         "babel-core": "^6.26.3",
         "babel-preset-env": "^1.7.0",
         "babel-preset-react": "^6.24.1",

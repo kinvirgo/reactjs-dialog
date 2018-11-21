@@ -1,6 +1,6 @@
 {
     "name": "reactjs-dialog",
-    "version": "v1.0.0-alpha.0",
+    "version": "v1.0.0-alpha.1",
     "main": "dist/reactjs-dialog.js",
     "description": "reactjs-dialog for react",
     "repository": {
@@ -16,8 +16,10 @@
     "scripts": {
         "test": "parcel -p 8900 example/test.html -d build/",
         "dev": "parcel -p 8900 example/index.html -d build/",
-        "prepublish": "rmdir /s/q dist",
-        "prebabel": "babel src/components/ --out-dir dist/"
+        "remove:dist": "rmdir /s/q dist",
+        "prebabel": "babel src/components/ --out-dir dist/",
+        "presass": "sass src/components/reactjs-dialog.scss:dist/reactjs-dialog.css --style compressed --no-source-map",
+        "prepublish": "yarn prebabel && yarn presass"
     },
     "keywords": [
         "react",
@@ -30,10 +32,13 @@
             "env",
             "react"
         ],
-        "plugins": ["transform-object-rest-spread"]
+        "plugins": [
+            "transform-object-rest-spread"
+        ]
     },
     "dependencies": {
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "dist": "^0.1.2",
         "react": "^16.6.3",
         "react-dom": "^16.6.3",
         "sass": "^1.15.1"

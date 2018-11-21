@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
-// style
-require("./reactjs-dialog.scss");
-
 class DialogCompoent extends Component {
     constructor(props) {
         super(props);
@@ -233,5 +230,4 @@ const install = new Dialog();
 export const Message = install.Message;
 export const Alert = install.Alert;
 export const Confirm = install.Confirm;
-export const Prompt = install.Prompt;
 export default Dialog;

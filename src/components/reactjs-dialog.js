@@ -225,9 +225,4 @@ class Dialog {
         })
     }
 }
-
-const install = new Dialog();
-export const Message = install.Message;
-export const Alert = install.Alert;
-export const Confirm = install.Confirm;
 export default Dialog;

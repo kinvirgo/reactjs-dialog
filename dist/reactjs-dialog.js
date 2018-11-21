@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Confirm = exports.Alert = exports.Message = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -332,8 +331,4 @@ var Dialog = function () {
     return Dialog;
 }();
 
-var install = new Dialog();
-var Message = exports.Message = install.Message;
-var Alert = exports.Alert = install.Alert;
-var Confirm = exports.Confirm = install.Confirm;
 exports.default = Dialog;

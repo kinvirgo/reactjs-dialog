@@ -30,7 +30,7 @@ class App extends Component{
                         // marginLeft : "-250px"
                     },
                     bgStyle : {
-                        background : `url(${require('../src/image/bg-1.jpg')})`,
+                        background : `url(${require('./image/bg-1.jpg')})`,
                         backgroundSize: 'cover'
                     },
                     titleStyle : {

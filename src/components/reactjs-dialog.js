@@ -225,4 +225,5 @@ class Dialog {
         })
     }
 }
-export default Dialog;
+
+module.exports = new Dialog();

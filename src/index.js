@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-
-import Dialog, {Message,Alert,Confirm,Prompt} from "./components/reactjs-dialog"
+// es6
+import _Dialog, { Message, Alert, Confirm } from "./components/reactjs-dialog.js"
 require('./components/reactjs-dialog.scss')
+// console.log(Message, Alert, Confirm);
+
+// es5
+const Dialog = require("./components/reactjs-dialog.js");
+console.log(Dialog, _Dialog);
 
 class App extends Component{
     constructor(){
@@ -14,10 +19,10 @@ class App extends Component{
         return(
             <div>
                 <h1>reactjs-Dialog v1.0.0</h1>
-                <button onClick={ ()=>{ Message("百度（纳斯达克：BIDU）","百度",{
+                <button onClick={ ()=>{ Dialog.Message("百度（纳斯达克：BIDU）","百度",{
                     mask : true
                 }) } }>Message1</button>
-                <button onClick={ ()=>{ Message(msg,title,{
+            <button onClick={ ()=>{ _Dialog.Message(msg,title,{
                         vHtml : true,
                     mask : true,
                     button : ['确认','退出'],

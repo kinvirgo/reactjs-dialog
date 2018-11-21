@@ -15,7 +15,9 @@
     "license": "MIT",
     "scripts": {
         "dev": "parcel -p 8900 src/index.html -d build/",
+        "test": "parcel example/index.html -d build/",
         "remove:dist": "rmdir /s/q dist",
+        "remove:build": "rmdir /s/q build",
         "prebabel": "babel src/components/ --out-dir dist/",
         "presass": "sass src/components/reactjs-dialog.scss:dist/reactjs-dialog.css --style compressed --no-source-map",
         "prepublish": "yarn prebabel && yarn presass"
@@ -37,7 +39,6 @@
     },
     "dependencies": {
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
-        "dist": "^0.1.2",
         "react": "^16.6.3",
         "react-dom": "^16.6.3",
         "sass": "^1.15.1"

@@ -2,10 +2,11 @@ import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
 //es6
-import Dialog, {Message, Alert, Confirm} from "../index"
+import Dialog, {Message, Alert, Confirm} from "./../index"
 
+console.log(Dialog);
 //es5
-// const Dialog =  require("../index");
+const _Dialog = require("./../index");
 
 class App extends Component {
     constructor() {
@@ -20,7 +21,7 @@ class App extends Component {
                     Dialog.Message("百度（纳斯达克：BIDU）", "百度", {mask: true})
                 }}>Message1</button>
             <button onClick={() => {
-                    Message(msg, title, {
+                    _Dialog.Message(msg, title, {
                         vHtml: true,
                         mask: true,
                         button: [],
@@ -33,8 +34,9 @@ class App extends Component {
                             // marginLeft : "-250px"
                         },
                         bgStyle: {
-                            background: `url(${require('./image/bg-1.jpg')})`,
-                            backgroundSize: 'cover'
+                            // background: `url(${require('../src/image/bg-1.jpg')})`,
+                            // backgroundSize: 'cover'
+                            background : '#9BC1FF'
                         },
                         titleStyle: {
                             'color': "#2985EA"

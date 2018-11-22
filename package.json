@@ -1,7 +1,7 @@
 {
     "name": "reactjs-dialog",
-    "version": "v1.0.0-alpha.2",
-    "main": "dist/reactjs-dialog.js",
+    "version": "v1.0.0-alpha.3",
+    "main": "index.js",
     "description": "reactjs-dialog for react",
     "repository": {
         "type": "git",

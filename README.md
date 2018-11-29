@@ -5,8 +5,8 @@ reactjs-dialog是基于react开发的弹窗(dialog)插件、目前支持:
 -   Message(自定义)  
 -   Alert(警告)
 -   Confirm(确认)  
-    _注意：Alert、Confirm 都是通过Message自定义而来_
-
+    _注意：Alert、Confirm 都是通过Message自定义而来_  
+    兼容：IE9+、Chrome、Firefox
 ## 安装
 
     npm i reactjs-dialog  
@@ -31,7 +31,7 @@ _注意：Message、Alert、Confirm 都会返回一个Promise()对象所以你�
     -   vHtml [Boolean] : 渲染方式以html渲染,默认false
     -   button [Array<String, Object>] : 按钮数量,可以是 String 或者 { "按钮名称" : {/\* 按钮样式 \*/} }
     - titlEffect [String] : 标题展示位置,有left、center、right可选,默认left
-    - btnReverse [Boolean] : 按钮反序排列即做有往右排列,默认false
+    - btnReverse [Boolean] : 按钮反序排列即从右往左排列,默认false
     - btnEffect [String] : 按钮展示位置,有left、center、right可选,默认center
     - isClose [Boolean] : 是否渲染右上角关闭按钮, 默认true
     - lineClamp [Number] : 内容最多显示几行,溢出省略 ≤ 10, 默认6

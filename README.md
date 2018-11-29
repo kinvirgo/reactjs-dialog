@@ -31,6 +31,7 @@ _注意：Message、Alert、Confirm 都会返回一个Promise()对象所以你�
     -   vHtml [Boolean] : 渲染方式以html渲染,默认false
     -   button [Array<String, Object>] : 按钮数量,可以是 String 或者 { "按钮名称" : {/\* 按钮样式 \*/} }
     - titlEffect [String] : 标题展示位置,有left、center、right可选,默认left
+    - btnReverse [Boolean] : 按钮反序排列即做有往右排列,默认false
     - btnEffect [String] : 按钮展示位置,有left、center、right可选,默认center
     - isClose [Boolean] : 是否渲染右上角关闭按钮, 默认true
     - lineClamp [Number] : 内容最多显示几行,溢出省略 ≤ 10, 默认6
@@ -39,6 +40,7 @@ _注意：Message、Alert、Confirm 都会返回一个Promise()对象所以你�
     - titleStyle [Object] : 弹窗标题自定义(react)样式
     - messageStyle [Object] : 弹窗内容自定义(react)样式
     - footerStyle [Object] : 弹窗按钮容器自定义(react)样式
+    - callback [Function] : 事件回调[注意：回调和then只会触发一个 优先级别：callback>Promise 如果回调return false;(仅限返回false触发)则Dialog将不会关闭]
 
 ## 事件
 由于采用了Promise链式写法(去掉了讨厌的回调)所以可以直接.then((results)=>{})来监听所有操作事件。results 会返回一个对象包含_id的对象_id是包含触发事件的id,id顺序依次是0(关闭)、按钮索引+1
@@ -53,6 +55,18 @@ _注意：Message、Alert、Confirm 都会返回一个Promise()对象所以你�
             window.close();
         }
     })
+
+    Message("你没有操作权限！请联系管理员。","警告",{
+        callback : (results)=>{
+            button : ["返回","立即退出"],
+            //处理关闭操作
+            if(results._id === 1){
+                // consoe.log("你没有操作权限！");
+                return false;
+            }
+        }
+    })
+    /* callback() 和 (Promise).then() 请勿同时使用,注意:[如果同时存在]callback() 优先级别高于 then()*/
 
 ```
 

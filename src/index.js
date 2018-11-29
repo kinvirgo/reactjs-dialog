@@ -19,6 +19,16 @@ class App extends Component{
         return(
             <div>
                 <h1>reactjs-Dialog v1.0.0</h1>
+                <button onClick={ ()=>{ Dialog.Message("用户协议！","是否同意使用协议。",{
+                    button : ["同意","不同意"],
+                    mask : true,
+                    callback : (data)=>{
+                        if(data._id == 2){
+                            alert("不同意无法使用。感谢你的支持！");
+                            return false;
+                        }
+                    }
+                }) } }>callback测试</button>
                 <button onClick={ ()=>{ Dialog.Message(msg,title,{
                     mask : true
                 }) } }>Message1</button>

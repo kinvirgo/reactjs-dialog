@@ -1,6 +1,6 @@
 {
     "name": "reactjs-dialog",
-    "version": "v1.0.0-alpha.3",
+    "version": "v1.0.0-alpha.4",
     "main": "index.js",
     "description": "reactjs-dialog for react",
     "repository": {
@@ -14,11 +14,11 @@
     "author": "kinvirgo <1641652086@qq.com>",
     "license": "MIT",
     "scripts": {
-        "dev": "parcel -p 8900 src/index.html -d build/",
-        "test": "parcel example/index.html -d build/",
-        "remove:dist": "rmdir /s/q dist",
-        "remove:build": "rmdir /s/q build",
-        "pre:babel": "babel src/components/ --out-dir dist/",
+        "dev": "cross-env NODE_ENV=development webpack-dev-server --colors --config  ./webpack.config.js",
+        "build": "cross-env NODE_ENV=production webpack --colors --config ./webpack.config.js",
+        "remove:dist": "rmdir /s dist",
+        "remove:build": "rmdir /s build",
+        "pre:babel": "babel --plugins transform-runtime src/components/ --out-dir dist/",
         "pre:sass": "sass src/components/reactjs-dialog.scss:dist/reactjs-dialog.css --style compressed --no-source-map",
         "pre:publish": "yarn pre:babel && yarn pre:sass"
     },
@@ -34,19 +34,34 @@
             "react"
         ],
         "plugins": [
+            "transform-runtime",
             "transform-object-rest-spread"
         ]
     },
     "dependencies": {
-        "babel-plugin-transform-object-rest-spread": "^6.26.0",
-        "react": "^16.6.3",
-        "react-dom": "^16.6.3"
+        "babel-runtime": "6.26.0"
     },
     "devDependencies": {
-        "sass": "^1.15.1",
         "babel-core": "^6.26.3",
-        "babel-preset-env": "^1.7.0",
+        "babel-loader": "7.1.5",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-plugin-transform-runtime": "6.23.0",
+        "babel-polyfill": "^6.26.0",
+        "babel-preset-env": "2.0.0-alpha.6",
         "babel-preset-react": "^6.24.1",
-        "parcel-bundler": "^1.10.3"
+        "cross-env": "^5.2.0",
+        "css-loader": "^1.0.1",
+        "file-loader": "^2.0.0",
+        "html-webpack-plugin": "^3.2.0",
+        "node-sass": "^4.9.4",
+        "react": "15.6.2",
+        "react-dom": "15.6.2",
+        "sass": "^1.15.1",
+        "sass-loader": "^7.1.0",
+        "style-loader": "^0.23.0",
+        "url-loader": "^1.1.1",
+        "webpack": "^4.26.1",
+        "webpack-cli": "^3.1.2",
+        "webpack-dev-server": "^3.1.8"
     }
 }

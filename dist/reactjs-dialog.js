@@ -1,8 +1,36 @@
 'use strict';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _promise = require('babel-runtime/core-js/promise');
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _promise2 = _interopRequireDefault(_promise);
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _react = require('react');
 
@@ -14,19 +42,13 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var DialogCompoent = function (_Component) {
-    _inherits(DialogCompoent, _Component);
+    (0, _inherits3.default)(DialogCompoent, _Component);
 
     function DialogCompoent(props) {
-        _classCallCheck(this, DialogCompoent);
+        (0, _classCallCheck3.default)(this, DialogCompoent);
 
-        var _this = _possibleConstructorReturn(this, (DialogCompoent.__proto__ || Object.getPrototypeOf(DialogCompoent)).call(this, props));
+        var _this = (0, _possibleConstructorReturn3.default)(this, (DialogCompoent.__proto__ || (0, _getPrototypeOf2.default)(DialogCompoent)).call(this, props));
 
         _this.config = {
             msg: "",
@@ -36,6 +58,7 @@ var DialogCompoent = function (_Component) {
             vHtml: false, //是否html渲染 一般不建议使用
             button: ["确认", "取消"], //按钮模块,从做只有对应顺序,id是对应的索引
             btnEffect: "center",
+            btnReverse: false, //按钮反序排列即做有往右排列
             titlEffect: "left",
             isClose: true, //是否关闭按钮
             lineClamp: 6, //内容最多显示几行,溢出省略 ≤ 10
@@ -44,11 +67,13 @@ var DialogCompoent = function (_Component) {
             bgStyle: {}, //弹窗背景样式 主要用于替换背景
             titleStyle: {}, //标题样式
             messageStyle: {}, //消息、内容模块样式
-            footerStyle: {} //消息、内容模块样式
+            footerStyle: {}, //消息、内容模块样式
+            callback: undefined //事件回调
 
             // 默认配置
-        };_this.state = _extends({}, _this.config);
+        };_this.state = (0, _extends3.default)({}, _this.config);
         _this.mask = _this.mask.bind(_this);
+        _this.hide = _this.hide.bind(_this);
         _this.dialog = _this.dialog.bind(_this);
         _this.footer = _this.footer.bind(_this);
         return _this;
@@ -56,7 +81,7 @@ var DialogCompoent = function (_Component) {
     // 消息
 
 
-    _createClass(DialogCompoent, [{
+    (0, _createClass3.default)(DialogCompoent, [{
         key: 'Message',
         value: function Message() {
             var msg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
@@ -64,7 +89,7 @@ var DialogCompoent = function (_Component) {
             var option = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
             var config = this.config;
 
-            this.setState(_extends({}, config, option, {
+            this.setState((0, _extends3.default)({}, config, option, {
                 display: true,
                 msg: msg,
                 title: title
@@ -78,7 +103,7 @@ var DialogCompoent = function (_Component) {
             var option = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
             var config = this.config;
 
-            this.setState(_extends({}, config, option, {
+            this.setState((0, _extends3.default)({}, config, option, {
                 display: true,
                 msg: msg,
                 title: title
@@ -92,7 +117,7 @@ var DialogCompoent = function (_Component) {
             var option = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
             var config = this.config;
 
-            this.setState(_extends({}, config, option, {
+            this.setState((0, _extends3.default)({}, config, option, {
                 display: true,
                 msg: msg,
                 title: title
@@ -104,6 +129,25 @@ var DialogCompoent = function (_Component) {
             return _react2.default.createElement('div', { className: 'd-dialog-mask' });
         }
     }, {
+        key: 'hide',
+        value: function hide(resolve, data) {
+            var callback = this.state.callback;
+            var state = this.state;
+
+            var r = true; //r为false就不会关闭会话
+            if (Object.prototype.toString.call(callback) === "[object Function]") {
+                r = callback(data);
+            }
+            if (Object.prototype.toString.call(r) != "[object Boolean]" || Object.prototype.toString.call(r) === "[object Boolean]" && !!r) {
+                // 布尔型、并且true
+                this.setState((0, _extends3.default)({}, state, {
+                    display: false
+                }), function () {
+                    resolve(data);
+                });
+            }
+        }
+    }, {
         key: 'footer',
         value: function footer() {
             var _this2 = this;
@@ -111,11 +155,13 @@ var DialogCompoent = function (_Component) {
             var _state = this.state,
                 btnEffect = _state.btnEffect,
                 button = _state.button,
-                footerStyle = _state.footerStyle;
+                footerStyle = _state.footerStyle,
+                btnReverse = _state.btnReverse;
 
+            var btnFloat = !!btnReverse ? 'right' : 'left';
             return _react2.default.createElement(
                 'ul',
-                { className: 'd-dialog-footer sn-f-cb btn-effect-' + btnEffect + ' btn-group-' + button.length, style: footerStyle },
+                { className: 'd-dialog-footer sn-f-cb btn-effect-' + btnEffect + ' btn-group-' + button.length + ' btn-item-' + btnFloat, style: footerStyle },
                 button.map(function (item, index) {
                     return _react2.default.createElement(
                         'li',
@@ -135,7 +181,7 @@ var DialogCompoent = function (_Component) {
         key: 'getBtnStyle',
         value: function getBtnStyle(item) {
             if (Object.prototype.toString.call(item) === "[object Object]") {
-                var key = Object.keys(item)[0];
+                var key = (0, _keys2.default)(item)[0];
                 return item[key];
             } else {
                 return {};
@@ -147,7 +193,7 @@ var DialogCompoent = function (_Component) {
             if (Object.prototype.toString.call(item) === "[object String]") {
                 return item;
             } else if (Object.prototype.toString.call(item) === "[object Object]") {
-                var itemArr = Object.keys(item);
+                var itemArr = (0, _keys2.default)(item);
                 return itemArr[0];
             } else {
                 return '-';
@@ -216,19 +262,18 @@ var DialogCompoent = function (_Component) {
 
             return _react2.default.createElement(
                 'div',
-                { 'd-dialog-root': '' },
+                { 'data-dialog-root': '' },
                 isMask && display && this.mask(),
                 display && this.dialog()
             );
         }
     }]);
-
     return DialogCompoent;
 }(_react.Component);
 
 var Dialog = function () {
     function Dialog() {
-        _classCallCheck(this, Dialog);
+        (0, _classCallCheck3.default)(this, Dialog);
 
         var div = document.createDocumentFragment();
         var dialogInstall = _reactDom2.default.render(_react2.default.createElement(DialogCompoent, null), div);
@@ -243,23 +288,24 @@ var Dialog = function () {
     // 消息
 
 
-    _createClass(Dialog, [{
+    (0, _createClass3.default)(Dialog, [{
         key: 'Message',
         value: function Message(msg, title, option) {
             var _this4 = this;
 
-            return new Promise(function (resolve, reject) {
+            return new _promise2.default(function (resolve, reject) {
                 var dialogInstall = _this4.state.dialogInstall;
 
                 dialogInstall.Message(msg, title, option);
                 dialogInstall.resolve = function (_id) {
-                    var state = dialogInstall.state;
-
-                    dialogInstall.setState(_extends({}, state, {
+                    dialogInstall.hide(resolve, { _id: _id });
+                    /*const {state} = dialogInstall;
+                    dialogInstall.setState({
+                        ...state,
                         display: false
-                    }), function () {
-                        resolve({ _id: _id });
-                    });
+                    }, () => {
+                        resolve({_id});
+                    })*/
                 };
             });
         }
@@ -270,7 +316,7 @@ var Dialog = function () {
         value: function Alert(msg, title) {
             var _this5 = this;
 
-            return new Promise(function (resolve, reject) {
+            return new _promise2.default(function (resolve, reject) {
                 var dialogInstall = _this5.state.dialogInstall;
 
                 dialogInstall.Alert(msg, title, {
@@ -283,13 +329,14 @@ var Dialog = function () {
                     }
                 });
                 dialogInstall.resolve = function (_id) {
-                    var state = dialogInstall.state;
-
-                    dialogInstall.setState(_extends({}, state, {
+                    dialogInstall.hide(resolve, { _id: _id });
+                    /*const {state} = dialogInstall;
+                    dialogInstall.setState({
+                        ...state,
                         display: false
-                    }), function () {
-                        resolve({ _id: _id });
-                    });
+                    }, () => {
+                        resolve({_id});
+                    })*/
                 };
             });
         }
@@ -300,7 +347,7 @@ var Dialog = function () {
         value: function Confirm(msg, title) {
             var _this6 = this;
 
-            return new Promise(function (resolve, reject) {
+            return new _promise2.default(function (resolve, reject) {
                 var dialogInstall = _this6.state.dialogInstall;
 
                 dialogInstall.Confirm(msg, title, {
@@ -312,18 +359,18 @@ var Dialog = function () {
                     }
                 });
                 dialogInstall.resolve = function (_id) {
-                    var state = dialogInstall.state;
-
-                    dialogInstall.setState(_extends({}, state, {
+                    dialogInstall.hide(resolve, { _id: _id });
+                    /*const {state} = dialogInstall;
+                    dialogInstall.setState({
+                        ...state,
                         display: false
-                    }), function () {
-                        resolve({ _id: _id });
-                    });
+                    }, () => {
+                        resolve({_id});
+                    })*/
                 };
             });
         }
     }]);
-
     return Dialog;
 }();
 

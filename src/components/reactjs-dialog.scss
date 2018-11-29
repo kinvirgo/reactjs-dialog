@@ -150,7 +150,6 @@ li {
 }
 
 .btn-item {
-    float: left;
     width: 33.333334%;
 
     button {
@@ -180,7 +179,18 @@ li {
         }
     }
 }
+
+.btn-item- {
+    &left .btn-item {
+        float: left;
+    }
+
+    &right .btn-item {
+        float: right;
+    }
+}
 // 一个按钮
+
 .btn-group-1 .btn-item {
     width: 100%;
 
@@ -210,6 +220,7 @@ li {
     }
 }
 // 三个按钮
+
 .btn-group-3 .btn-item {
     width: 33.333334%;
 

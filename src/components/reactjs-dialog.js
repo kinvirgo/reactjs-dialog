@@ -14,6 +14,7 @@ class DialogCompoent extends Component {
                 "确认", "取消"
             ], //按钮模块,从做只有对应顺序,id是对应的索引
             btnEffect: "center",
+            btnReverse : false, //按钮反序排列即做有往右排列
             titlEffect: "left",
             isClose: true, //是否关闭按钮
             lineClamp: 6, //内容最多显示几行,溢出省略 ≤ 10
@@ -23,12 +24,14 @@ class DialogCompoent extends Component {
             titleStyle: {}, //标题样式
             messageStyle: {}, //消息、内容模块样式
             footerStyle: {}, //消息、内容模块样式
+            callback : undefined, //事件回调
         }
         // 默认配置
         this.state = {
             ...this.config
         }
         this.mask = this.mask.bind(this);
+        this.hide = this.hide.bind(this);
         this.dialog = this.dialog.bind(this);
         this.footer = this.footer.bind(this);
     }
@@ -66,9 +69,27 @@ class DialogCompoent extends Component {
     mask() {
         return <div className="d-dialog-mask"></div>
     }
+    hide(resolve, data){
+        const {callback} = this.state;
+        const {state} = this;
+        let r = true; //r为false就不会关闭会话
+        if( Object.prototype.toString.call(callback) === "[object Function]" ){
+            r = callback(data);
+        }
+        if(Object.prototype.toString.call(r) != "[object Boolean]" || (Object.prototype.toString.call(r) === "[object Boolean]" && !!r) ){
+            // 布尔型、并且true
+            this.setState({
+                ...state,
+                display: false
+            }, () => {
+                resolve(data);
+            });
+        }
+    }
     footer() {
-        const {btnEffect, button, footerStyle} = this.state;
-        return (<ul className={`d-dialog-footer sn-f-cb btn-effect-${btnEffect} btn-group-${button.length}`} style={footerStyle}>
+        const {btnEffect, button, footerStyle, btnReverse} = this.state;
+        const btnFloat = !!btnReverse ? 'right' : 'left' ;
+        return (<ul className={`d-dialog-footer sn-f-cb btn-effect-${btnEffect} btn-group-${button.length} btn-item-${btnFloat}`} style={footerStyle}>
             {
                 button.map((item, index) => {
                     return (<li className="btn-item" key={index}>
@@ -142,7 +163,7 @@ class DialogCompoent extends Component {
     }
     render() {
         const {mask: isMask, display} = this.state;
-        return (<div d-dialog-root=''>
+        return (<div data-dialog-root="" >
             {isMask && display && this.mask()}
             {display && this.dialog()}
         </div>)
@@ -167,13 +188,14 @@ class Dialog {
             const {dialogInstall} = this.state;
             dialogInstall.Message(msg, title, option);
             dialogInstall.resolve = (_id) => {
-                const {state} = dialogInstall;
+                dialogInstall.hide(resolve, {_id});
+                /*const {state} = dialogInstall;
                 dialogInstall.setState({
                     ...state,
                     display: false
                 }, () => {
                     resolve({_id});
-                })
+                })*/
             }
         })
     }
@@ -191,13 +213,14 @@ class Dialog {
                 }
             });
             dialogInstall.resolve = (_id) => {
-                const {state} = dialogInstall;
+                dialogInstall.hide(resolve, {_id});
+                /*const {state} = dialogInstall;
                 dialogInstall.setState({
                     ...state,
                     display: false
                 }, () => {
                     resolve({_id});
-                })
+                })*/
             }
         })
     }
@@ -214,13 +237,14 @@ class Dialog {
                 }
             });
             dialogInstall.resolve = (_id) => {
-                const {state} = dialogInstall;
+                dialogInstall.hide(resolve, {_id});
+                /*const {state} = dialogInstall;
                 dialogInstall.setState({
                     ...state,
                     display: false
                 }, () => {
                     resolve({_id});
-                })
+                })*/
             }
         })
     }

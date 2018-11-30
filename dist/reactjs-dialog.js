@@ -40,6 +40,8 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _reactTransitionGroup = require('react-transition-group');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DialogCompoent = function (_Component) {
@@ -68,7 +70,8 @@ var DialogCompoent = function (_Component) {
             titleStyle: {}, //标题样式
             messageStyle: {}, //消息、内容模块样式
             footerStyle: {}, //消息、内容模块样式
-            callback: undefined //事件回调
+            callback: undefined, //事件回调
+            classNames: "fade" //内置 fade、move、zoom
 
             // 默认配置
         };_this.state = (0, _extends3.default)({}, _this.config);
@@ -126,7 +129,19 @@ var DialogCompoent = function (_Component) {
     }, {
         key: 'mask',
         value: function mask() {
-            return _react2.default.createElement('div', { className: 'd-dialog-mask' });
+            var _state = this.state,
+                isMask = _state.mask,
+                display = _state.display;
+
+            if (isMask) {
+                return _react2.default.createElement(
+                    _reactTransitionGroup.CSSTransition,
+                    { 'in': display, timeout: 300, classNames: 'fade', unmountOnExit: true },
+                    _react2.default.createElement('div', { className: 'd-dialog-mask' })
+                );
+            } else {
+                return null;
+            }
         }
     }, {
         key: 'hide',
@@ -152,11 +167,11 @@ var DialogCompoent = function (_Component) {
         value: function footer() {
             var _this2 = this;
 
-            var _state = this.state,
-                btnEffect = _state.btnEffect,
-                button = _state.button,
-                footerStyle = _state.footerStyle,
-                btnReverse = _state.btnReverse;
+            var _state2 = this.state,
+                btnEffect = _state2.btnEffect,
+                button = _state2.button,
+                footerStyle = _state2.footerStyle,
+                btnReverse = _state2.btnReverse;
 
             var btnFloat = !!btnReverse ? 'right' : 'left';
             return _react2.default.createElement(
@@ -204,67 +219,72 @@ var DialogCompoent = function (_Component) {
         value: function dialog() {
             var _this3 = this;
 
-            var _state2 = this.state,
-                dialogStyle = _state2.dialogStyle,
-                bgStyle = _state2.bgStyle,
-                titleStyle = _state2.titleStyle,
-                messageStyle = _state2.messageStyle,
-                footerStyle = _state2.footerStyle,
-                isClose = _state2.isClose,
-                title = _state2.title,
-                msg = _state2.msg,
-                vHtml = _state2.vHtml,
-                titlEffect = _state2.titlEffect,
-                lineClamp = _state2.lineClamp;
+            var _state3 = this.state,
+                dialogStyle = _state3.dialogStyle,
+                bgStyle = _state3.bgStyle,
+                titleStyle = _state3.titleStyle,
+                messageStyle = _state3.messageStyle,
+                footerStyle = _state3.footerStyle,
+                isClose = _state3.isClose,
+                title = _state3.title,
+                msg = _state3.msg,
+                vHtml = _state3.vHtml,
+                titlEffect = _state3.titlEffect,
+                lineClamp = _state3.lineClamp,
+                display = _state3.display,
+                isMask = _state3.mask,
+                classNames = _state3.classNames;
 
             return _react2.default.createElement(
-                'div',
-                { className: 'd-dialog-section', style: dialogStyle },
-                _react2.default.createElement('div', { className: 'd-dialog-section-bg', style: bgStyle }),
-                isClose && _react2.default.createElement(
-                    'button',
-                    { className: 'd-dialog-btnClose', type: 'button', onClick: function onClick() {
-                            _this3.resolve(0);
-                        } },
-                    '\xD7'
-                ),
+                _reactTransitionGroup.CSSTransition,
+                { 'in': display, timeout: 300, classNames: classNames, unmountOnExit: true },
                 _react2.default.createElement(
                     'div',
-                    { className: 'd-dialog-head title-effect-' + titlEffect },
-                    vHtml ? _react2.default.createElement('h4', { style: titleStyle, dangerouslySetInnerHTML: {
-                            __html: title
-                        } }) : _react2.default.createElement(
-                        'h4',
-                        { style: titleStyle },
-                        title
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'd-dialog-body' },
-                    vHtml ? _react2.default.createElement('div', { className: 'd-dialog-message line-clamp-' + lineClamp, style: messageStyle, dangerouslySetInnerHTML: {
-                            __html: msg
-                        } }) : _react2.default.createElement(
+                    { className: 'd-dialog-section', style: dialogStyle },
+                    _react2.default.createElement('div', { className: 'd-dialog-section-bg box-shadow', style: bgStyle }),
+                    isClose && _react2.default.createElement(
+                        'button',
+                        { className: 'd-dialog-btnClose', type: 'button', onClick: function onClick() {
+                                _this3.resolve(0);
+                            } },
+                        '\xD7'
+                    ),
+                    _react2.default.createElement(
                         'div',
-                        { className: 'd-dialog-message line-clamp-' + lineClamp, style: messageStyle },
-                        msg
-                    )
-                ),
-                this.footer()
+                        { className: 'd-dialog-head title-effect-' + titlEffect },
+                        vHtml ? _react2.default.createElement('h4', { style: titleStyle, dangerouslySetInnerHTML: {
+                                __html: title
+                            } }) : _react2.default.createElement(
+                            'h4',
+                            { style: titleStyle },
+                            title
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'd-dialog-body' },
+                        vHtml ? _react2.default.createElement('div', { className: 'd-dialog-message line-clamp-' + lineClamp, style: messageStyle, dangerouslySetInnerHTML: {
+                                __html: msg
+                            } }) : _react2.default.createElement(
+                            'div',
+                            { className: 'd-dialog-message line-clamp-' + lineClamp, style: messageStyle },
+                            msg
+                        )
+                    ),
+                    this.footer()
+                )
             );
         }
     }, {
         key: 'render',
         value: function render() {
-            var _state3 = this.state,
-                isMask = _state3.mask,
-                display = _state3.display;
+            var display = this.state.display;
 
             return _react2.default.createElement(
                 'div',
                 { 'data-dialog-root': '' },
-                isMask && display && this.mask(),
-                display && this.dialog()
+                this.mask(),
+                this.dialog()
             );
         }
     }]);
@@ -299,13 +319,6 @@ var Dialog = function () {
                 dialogInstall.Message(msg, title, option);
                 dialogInstall.resolve = function (_id) {
                     dialogInstall.hide(resolve, { _id: _id });
-                    /*const {state} = dialogInstall;
-                    dialogInstall.setState({
-                        ...state,
-                        display: false
-                    }, () => {
-                        resolve({_id});
-                    })*/
                 };
             });
         }
@@ -330,13 +343,6 @@ var Dialog = function () {
                 });
                 dialogInstall.resolve = function (_id) {
                     dialogInstall.hide(resolve, { _id: _id });
-                    /*const {state} = dialogInstall;
-                    dialogInstall.setState({
-                        ...state,
-                        display: false
-                    }, () => {
-                        resolve({_id});
-                    })*/
                 };
             });
         }
@@ -360,13 +366,6 @@ var Dialog = function () {
                 });
                 dialogInstall.resolve = function (_id) {
                     dialogInstall.hide(resolve, { _id: _id });
-                    /*const {state} = dialogInstall;
-                    dialogInstall.setState({
-                        ...state,
-                        display: false
-                    }, () => {
-                        resolve({_id});
-                    })*/
                 };
             });
         }

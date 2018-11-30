@@ -41,6 +41,7 @@ _注意：Message、Alert、Confirm 都会返回一个Promise()对象所以你�
     - messageStyle [Object] : 弹窗内容自定义(react)样式
     - footerStyle [Object] : 弹窗按钮容器自定义(react)样式
     - callback [Function] : 事件回调[注意：回调和then只会触发一个 优先级别：callback>Promise 如果回调return false;(仅限返回false触发)则Dialog将不会关闭]
+    - classNames [String] : 动画类型内置[fade、move、zoom],默认fade;当然也可以自定义动画(只要符合[react-transition-group](https://www.npmjs.com/package/react-transition-group)动画css命名规则,都是有效的)。
 
 ## 事件
 由于采用了Promise链式写法(去掉了讨厌的回调)所以可以直接.then((results)=>{})来监听所有操作事件。results 会返回一个对象包含_id的对象_id是包含触发事件的id,id顺序依次是0(关闭)、按钮索引+1

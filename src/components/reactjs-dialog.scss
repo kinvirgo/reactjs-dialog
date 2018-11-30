@@ -1,5 +1,3 @@
-$mask-bg-url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjUzODU4N0Y5RDVEODExRTg5QUJGOUM5RjVDNEM4MTZDIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjUzODU4N0ZBRDVEODExRTg5QUJGOUM5RjVDNEM4MTZDIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTM4NTg3RjdENUQ4MTFFODlBQkY5QzlGNUM0QzgxNkMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTM4NTg3RjhENUQ4MTFFODlBQkY5QzlGNUM0QzgxNkMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4VpGIUAAAAFUlEQVR42mJkYGAwBmIGJgYoAAgwAAMAADcad0wWAAAAAElFTkSuQmCC" !default;
-
 li,
 ul {
     margin: 0;
@@ -24,7 +22,7 @@ li {
     right: 0;
     bottom: 0;
     top: 0;
-    background: url($mask-bg-url);
+    background: rgba(0,0,0,.3);
     z-index: 1000;
 }
 
@@ -46,6 +44,11 @@ li {
     padding-bottom: 50px;
 }
 
+.box-shadow {
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.30);
+    -webkit-box-shadow: 0 2px 12px 0 rgba(0,0,0,0.30);
+}
+
 .d-dialog-section-bg {
     position: absolute;
     left: 0;
@@ -58,18 +61,19 @@ li {
 
 .d-dialog-btnClose {
     position: absolute;
-    right: 4px;
-    top: 4px;
-    width: 24px;
-    height: 24px;
+    right: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
     background: transparent;
     border: 0;
     font-size: 20px;
-    line-height: 20px;
+    line-height: 30px;
     font-weight: 300;
     outline: 0;
     cursor: pointer;
     color: #979CA5;
+    text-align: center;
 
     &:hover {
         color: #E94437;
@@ -253,5 +257,95 @@ li {
 
     &:focus {
         border-color: #3385F1;
+    }
+}
+/*===自定义 入场动画===*/
+.fade-appear,
+.fade-enter {
+    /*入场动画执行的第一个时刻*/
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.fade-appear-active,
+.fade-enter-active {
+    /*入场动画执行的第二个瞬间一直到执行完成的时刻*/
+    opacity: 1;
+}
+.fade-enter-done {
+    /*入场动画执行完成之后*/
+    opacity: 1;
+}
+// /*====出场动画====*/
+.fade-exit {
+    opacity: 1;
+    transition: all 0.3s;
+}
+.fade-exit-active {
+    opacity: 0;
+}
+.fade-exit-done {
+    // 动画结束 如果设置了unmountOnExit  就不需要了
+    display: none;
+}
+
+/*========zoom 缩放动画========*/
+.zoom-{
+    &appear,
+    &enter{
+        opacity: 0;
+        transform: scale(.5);
+        transition: all 0.3s;
+    }
+    &appear-active,
+    &enter-active{
+        opacity: 1;
+        transform: scale(1);
+    }
+    &enter-done{
+        opacity: 1;
+        transform: scale(1);
+    }
+    &exit{
+        opacity: 1;
+        transform: scale(1);
+        transition: all 0.3s;
+    }
+    &exit-active{
+        opacity: 0;
+        transform: scale(.5);
+    }
+    &exit-done{
+        display: none;
+    }
+}
+/*======move 动画====*/
+.move-{
+    &appear,
+    &enter{
+        opacity: 0;
+        transform: translateY(-100px);
+        transition: all 0.3s;
+    }
+    &appear-active,
+    &enter-active{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    &enter-done{
+        opacity: 1;
+        transform: scale(1);
+    }
+    &exit{
+        opacity: 1;
+        transform: translateY(0);
+        transition: all 0.3s;
+    }
+    &exit-active{
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    &exit-done{
+        display: none;
     }
 }

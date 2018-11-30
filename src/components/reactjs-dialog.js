@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
 
 class DialogCompoent extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class DialogCompoent extends Component {
                 "确认", "取消"
             ], //按钮模块,从做只有对应顺序,id是对应的索引
             btnEffect: "center",
-            btnReverse : false, //按钮反序排列即做有往右排列
+            btnReverse: false, //按钮反序排列即做有往右排列
             titlEffect: "left",
             isClose: true, //是否关闭按钮
             lineClamp: 6, //内容最多显示几行,溢出省略 ≤ 10
@@ -24,7 +25,8 @@ class DialogCompoent extends Component {
             titleStyle: {}, //标题样式
             messageStyle: {}, //消息、内容模块样式
             footerStyle: {}, //消息、内容模块样式
-            callback : undefined, //事件回调
+            callback: undefined, //事件回调
+            classNames : "fade", //内置 fade、move、zoom
         }
         // 默认配置
         this.state = {
@@ -67,16 +69,23 @@ class DialogCompoent extends Component {
         })
     }
     mask() {
-        return <div className="d-dialog-mask"></div>
+        const {mask: isMask, display} = this.state;
+        if (isMask) {
+            return (<CSSTransition in={display} timeout={300} classNames='fade' unmountOnExit>
+                <div className="d-dialog-mask"></div>
+            </CSSTransition>)
+        } else {
+            return null;
+        }
     }
-    hide(resolve, data){
+    hide(resolve, data) {
         const {callback} = this.state;
         const {state} = this;
         let r = true; //r为false就不会关闭会话
-        if( Object.prototype.toString.call(callback) === "[object Function]" ){
+        if (Object.prototype.toString.call(callback) === "[object Function]") {
             r = callback(data);
         }
-        if(Object.prototype.toString.call(r) != "[object Boolean]" || (Object.prototype.toString.call(r) === "[object Boolean]" && !!r) ){
+        if (Object.prototype.toString.call(r) != "[object Boolean]" || (Object.prototype.toString.call(r) === "[object Boolean]" && !!r)) {
             // 布尔型、并且true
             this.setState({
                 ...state,
@@ -88,7 +97,9 @@ class DialogCompoent extends Component {
     }
     footer() {
         const {btnEffect, button, footerStyle, btnReverse} = this.state;
-        const btnFloat = !!btnReverse ? 'right' : 'left' ;
+        const btnFloat = !!btnReverse
+            ? 'right'
+            : 'left';
         return (<ul className={`d-dialog-footer sn-f-cb btn-effect-${btnEffect} btn-group-${button.length} btn-item-${btnFloat}`} style={footerStyle}>
             {
                 button.map((item, index) => {
@@ -131,42 +142,47 @@ class DialogCompoent extends Component {
             msg,
             vHtml,
             titlEffect,
-            lineClamp
+            lineClamp,
+            display,
+            mask: isMask,
+            classNames
         } = this.state;
-        return (<div className="d-dialog-section" style={dialogStyle}>
-            <div className="d-dialog-section-bg" style={bgStyle}></div>
+        return (<CSSTransition in={display} timeout={300} classNames={classNames} unmountOnExit >
+            <div className="d-dialog-section" style={dialogStyle}>
+                <div className="d-dialog-section-bg box-shadow" style={bgStyle}></div>
             {
                 isClose && <button className="d-dialog-btnClose" type="button" onClick={() => {
-                            this.resolve(0)
-                        }}>×</button>
+                    this.resolve(0)
+                }}>×</button>
             }
             <div className={`d-dialog-head title-effect-${titlEffect}`}>
                 {
                     vHtml
-                        ? <h4 style={titleStyle} dangerouslySetInnerHTML={{
-                                    __html: title
-                                }}></h4>
-                        : <h4 style={titleStyle}>{title}</h4>
-                }
+                    ? <h4 style={titleStyle} dangerouslySetInnerHTML={{
+                        __html: title
+                    }}></h4>
+                    : <h4 style={titleStyle}>{title}</h4>
+            }
+        </div>
+        <div className="d-dialog-body">
+            {
+                vHtml
+                ? <div className={`d-dialog-message line-clamp-${lineClamp}`} style={messageStyle} dangerouslySetInnerHTML={{
+                    __html: msg
+                }}></div>
+                : <div className={`d-dialog-message line-clamp-${lineClamp}`} style={messageStyle}>{msg}</div>
+                    }
+                </div>
+                {this.footer()}
             </div>
-            <div className="d-dialog-body">
-                {
-                    vHtml
-                        ? <div className={`d-dialog-message line-clamp-${lineClamp}`} style={messageStyle} dangerouslySetInnerHTML={{
-                                    __html: msg
-                                }}></div>
-                        : <div className={`d-dialog-message line-clamp-${lineClamp}`} style={messageStyle}>{msg}</div>
-                }
-            </div>
-            {this.footer()}
-        </div>);
+        </CSSTransition>);
     }
     render() {
-        const {mask: isMask, display} = this.state;
-        return (<div data-dialog-root="" >
-            {isMask && display && this.mask()}
-            {display && this.dialog()}
-        </div>)
+        const {display} = this.state;
+        return (<div data-dialog-root="">
+                {this.mask()}
+                {this.dialog()}
+            </div>)
     }
 }
 
@@ -189,13 +205,6 @@ class Dialog {
             dialogInstall.Message(msg, title, option);
             dialogInstall.resolve = (_id) => {
                 dialogInstall.hide(resolve, {_id});
-                /*const {state} = dialogInstall;
-                dialogInstall.setState({
-                    ...state,
-                    display: false
-                }, () => {
-                    resolve({_id});
-                })*/
             }
         })
     }
@@ -214,13 +223,6 @@ class Dialog {
             });
             dialogInstall.resolve = (_id) => {
                 dialogInstall.hide(resolve, {_id});
-                /*const {state} = dialogInstall;
-                dialogInstall.setState({
-                    ...state,
-                    display: false
-                }, () => {
-                    resolve({_id});
-                })*/
             }
         })
     }
@@ -238,13 +240,6 @@ class Dialog {
             });
             dialogInstall.resolve = (_id) => {
                 dialogInstall.hide(resolve, {_id});
-                /*const {state} = dialogInstall;
-                dialogInstall.setState({
-                    ...state,
-                    display: false
-                }, () => {
-                    resolve({_id});
-                })*/
             }
         })
     }
